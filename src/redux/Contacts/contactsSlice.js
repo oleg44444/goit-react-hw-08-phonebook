@@ -29,34 +29,37 @@ export const contactsApi = createApi({
   baseQuery: axiosBaseQuery({
     baseUrl: 'https://connections-api.herokuapp.com',
   }),
-  endpoints: builder => ({
-    getContacts: builder.query({
-      query: () => '/contacts',
-      providesTags: ['Contacts'],
+  endpoints: build => ({
+    getContacts: build.query({
+      query: () => ({
+        url: '/contacts/',
+        method: 'get',
+        providesTags: ['Contacts'],
+      }),
     }),
 
-    addContact: builder.mutation({
-      query: ({ name, number }) => ({
+    addContact: build.mutation({
+      query: ({ name = '', number = '' }) => ({
         url: '/contacts',
-        method: 'POST',
+        method: 'post',
         body: { name, number },
       }),
       invalidatesTags: ['Contacts'],
     }),
-    deleteContact: builder.mutation({
+    deleteContact: build.mutation({
       query: ({ id }) => ({
         url: `/contacts/${id}`,
-        method: 'DELETE',
+        method: 'delete',
       }),
       invalidatesTags: ['Contacts'],
     }),
-    filteredContacts: builder.mutation({
-      query: ({ name }) => ({
-        url: '/contacts/',
+    filteredContacts: build.mutation({
+      query: ({ name = '' }) => ({
+        url: '/contacts',
         method: 'put',
         body: { name },
+        invalidatesTags: ['Contacts'],
       }),
-      invalidatesTags: ['Contacts'],
     }),
   }),
 });

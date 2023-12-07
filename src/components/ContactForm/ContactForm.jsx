@@ -6,7 +6,7 @@ import { useAddContactMutation } from '../../redux/Contacts/contactsSlice';
 const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  const [addContact, { isLoading }] = useAddContactMutation();
+  const [addContact, { isLoading, isError, error }] = useAddContactMutation();
 
   const handleChange = ({ target }) => {
     if (target.name === 'name') {
@@ -15,23 +15,28 @@ const ContactForm = () => {
       setNumber(target.value);
     }
   };
-
-  const handleSubmit = async e => {
+  const handleSubmit = e => {
     e.preventDefault();
 
+    console.log('Submitting:', { name, number }); // Додайте цей вивід для перевірки
+
     try {
-      await addContact({ name, number });
+      addContact({ name, number }); // Зміни тут
     } catch (error) {
+      // Обробка помилок
       console.error('Error adding contact:', error);
     }
 
+    // Тут ви можете робити щось з результатом, якщо потрібно
+
+    // Очищення полів форми
     setName('');
     setNumber('');
   };
 
   return (
     <form onSubmit={handleSubmit} className={styles.contactForm}>
-      {/* {error && <div className={styles.error}>{error}</div>} */}
+      {isError && <div className={styles.error}>{error?.message}</div>}
 
       <label htmlFor="name" className={styles.label}>
         Ім'я
