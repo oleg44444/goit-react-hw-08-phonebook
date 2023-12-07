@@ -5,14 +5,14 @@ import { useAddContactMutation } from '../../redux/Contacts/contactsSlice';
 
 const ContactForm = () => {
   const [name, setName] = useState('');
-  const [number, setPhone] = useState('');
+  const [number, setNumber] = useState('');
   const [addContact, { isLoading }] = useAddContactMutation();
 
   const handleChange = ({ target }) => {
     if (target.name === 'name') {
       setName(target.value);
     } else if (target.name === 'number') {
-      setPhone(target.value);
+      setNumber(target.value);
     }
   };
 
@@ -26,7 +26,7 @@ const ContactForm = () => {
     }
 
     setName('');
-    setPhone('');
+    setNumber('');
   };
 
   return (
@@ -46,7 +46,7 @@ const ContactForm = () => {
           onChange={handleChange}
         />
       </label>
-      <label htmlFor="phone" className={styles.label}>
+      <label htmlFor="number" className={styles.label}>
         Телефон
         <input
           type="tel"
