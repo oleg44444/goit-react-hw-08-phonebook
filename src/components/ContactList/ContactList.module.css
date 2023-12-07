@@ -1,0 +1,34 @@
+/* ContactList.module.css */
+
+.contactList {
+  list-style: none;
+  padding: 0;
+}
+
+.contactItem {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+}
+
+.contactDetails {
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.deleteButton {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.deleteButton:hover {
+  background-color: #0056b3;
+}

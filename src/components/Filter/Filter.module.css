@@ -1,0 +1,15 @@
+.filterLabel {
+  font-size: 16px;
+  margin-bottom: 8px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.filterInput {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
