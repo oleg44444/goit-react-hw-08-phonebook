@@ -5,13 +5,13 @@ import { useAddContactMutation } from '../../redux/Contacts/contactsSlice';
 
 const ContactForm = () => {
   const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
+  const [number, setPhone] = useState('');
   const [addContact, { isLoading }] = useAddContactMutation();
 
   const handleChange = ({ target }) => {
     if (target.name === 'name') {
       setName(target.value);
-    } else if (target.name === 'phone') {
+    } else if (target.name === 'number') {
       setPhone(target.value);
     }
   };
@@ -20,7 +20,7 @@ const ContactForm = () => {
     e.preventDefault();
 
     try {
-      await addContact({ name, phone });
+      await addContact({ name, number });
     } catch (error) {
       console.error('Error adding contact:', error);
     }
@@ -50,8 +50,8 @@ const ContactForm = () => {
         Телефон
         <input
           type="tel"
-          name="phone"
-          value={phone}
+          name="number"
+          value={number}
           className={styles.input}
           pattern="\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"
           title="Номер телефону повинен бути цифрами і може містити пробіли, тире, круглі дужки та може починатися з +"
