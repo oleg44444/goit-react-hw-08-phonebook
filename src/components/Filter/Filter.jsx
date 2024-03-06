@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import styles from './Filter.module.css';
-import { useSelector, useDispatch } from 'react-redux';
-import { updateFilter, selectFilter } from '../../redux/Contacts/filterSlice';
+import { updateFilter } from 'redux/Contacts/filterSlice';
 
 const Filter = () => {
+  const [filterValue, setFilterValue] = useState('');
   const dispatch = useDispatch();
-  const value = useSelector(selectFilter);
 
   const changeFilter = e => {
-    dispatch(updateFilter(e.target.value));
+    const value = e.target.value;
+    setFilterValue(value);
+    dispatch(updateFilter(value));
   };
 
   return (
@@ -18,11 +20,12 @@ const Filter = () => {
         <input
           className={styles.filterInput}
           type="text"
-          value={value}
+          value={filterValue}
           onChange={changeFilter}
         />
       </label>
     </div>
   );
 };
+
 export default Filter;

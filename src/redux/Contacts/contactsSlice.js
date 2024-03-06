@@ -12,12 +12,15 @@ const axiosBaseQuery =
         params,
         headers,
       });
+      console.log('Axios Response:', result);
       return { data: result.data };
     } catch (axiosError) {
       const err = axiosError;
+      console.error('Axios Error:', err);
       return {
         error: {
           status: err.response?.status,
+          message: err.response?.data?.message || err.message,
           data: err.response?.data || err.message,
         },
       };
@@ -32,20 +35,21 @@ export const contactsApi = createApi({
   endpoints: build => ({
     getContacts: build.query({
       query: () => ({
-        url: '/contacts/',
+        url: '/contacts',
         method: 'get',
         providesTags: ['Contacts'],
       }),
     }),
 
     addContact: build.mutation({
-      query: ({ name = '', number = '' }) => ({
+      query: ({ name, number }) => ({
         url: '/contacts',
         method: 'post',
-        body: { name, number },
+        data: { name, number },
       }),
       invalidatesTags: ['Contacts'],
     }),
+
     deleteContact: build.mutation({
       query: ({ id }) => ({
         url: `/contacts/${id}`,
@@ -53,20 +57,11 @@ export const contactsApi = createApi({
       }),
       invalidatesTags: ['Contacts'],
     }),
-    filteredContacts: build.mutation({
-      query: ({ name = '' }) => ({
-        url: '/contacts',
-        method: 'put',
-        body: { name },
-        invalidatesTags: ['Contacts'],
-      }),
-    }),
   }),
 });
 
 export const {
   useGetContactsQuery,
-  useFilteredContactsMutation,
   useAddContactMutation,
   useDeleteContactMutation,
 } = contactsApi;

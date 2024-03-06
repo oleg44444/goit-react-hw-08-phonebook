@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import styles from './ContactForm.module.css';
 
-import { useAddContactMutation } from '../../redux/Contacts/contactsSlice';
+import {
+  useAddContactMutation,
+  useGetContactsQuery,
+} from '../../redux/Contacts/contactsSlice';
 
 const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const [addContact, { isLoading, isError, error }] = useAddContactMutation();
+  const { refetch } = useGetContactsQuery();
 
   const handleChange = ({ target }) => {
     if (target.name === 'name') {
@@ -15,21 +19,24 @@ const ContactForm = () => {
       setNumber(target.value);
     }
   };
-  const handleSubmit = e => {
+
+  const handleSubmit = async e => {
     e.preventDefault();
 
-    console.log('Submitting:', { name, number }); // Додайте цей вивід для перевірки
+    if (!name || !number) {
+      console.error('Error adding contact: Missing required fields');
+      return;
+    }
+
+    console.log('Submitting:', { name: name, number: number });
 
     try {
-      addContact({ name, number }); // Зміни тут
+      await addContact({ name: name, number: number });
+      refetch();
     } catch (error) {
-      // Обробка помилок
       console.error('Error adding contact:', error);
     }
 
-    // Тут ви можете робити щось з результатом, якщо потрібно
-
-    // Очищення полів форми
     setName('');
     setNumber('');
   };
