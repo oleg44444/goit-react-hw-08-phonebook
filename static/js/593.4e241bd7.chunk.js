@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkreact_homework_template=self.webpackChunkreact_homework_template||[]).push([[593],{4593:function(e,t,o){o.r(t),o.d(t,{default:function(){return r}});var n=o(184);function r(){return(0,n.jsxs)("div",{children:[(0,n.jsx)("h1",{children:"Hello, this is the phonebook app."}),(0,n.jsx)("p",{children:"This is where you can use your contacts, add and delete them, for this you need to register or log in to your own account"})]})}}}]);
+//# sourceMappingURL=593.4e241bd7.chunk.js.map
