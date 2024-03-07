@@ -21,57 +21,42 @@ const App = () => {
   }, [dispatch]);
 
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101',
-      }}
-    >
-      <div>
-        {isRefreshing ? (
-          'loading...'
-        ) : (
-          <Suspense fallback={<div>Loading...</div>}>
-            <Routes>
-              <Route path="/" element={<Layout />}>
-                <Route index="/" element={<Home />} />
-                <Route
-                  path="/register"
-                  element={
-                    <RestrictedRoute
-                      redirectTo="/contacts"
-                      component={<Register />}
-                    />
-                  }
-                />
-                <Route
-                  path="/login"
-                  element={
-                    <RestrictedRoute
-                      redirectTo="/contacts"
-                      component={<Login />}
-                    />
-                  }
-                />
-                <Route
-                  path="/contacts"
-                  element={
-                    <PrivateRoute
-                      redirectTo="/login"
-                      component={<Contacts />}
-                    />
-                  }
-                />
-              </Route>
-            </Routes>
-          </Suspense>
-        )}
-      </div>
+    <div className="container" maxWidth="xl">
+      {isRefreshing ? (
+        'loading...'
+      ) : (
+        <Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index="/" element={<Home />} />
+              <Route
+                path="/register"
+                element={
+                  <RestrictedRoute
+                    redirectTo="/contacts"
+                    component={<Register />}
+                  />
+                }
+              />
+              <Route
+                path="/login"
+                element={
+                  <RestrictedRoute
+                    redirectTo="/contacts"
+                    component={<Login />}
+                  />
+                }
+              />
+              <Route
+                path="/contacts"
+                element={
+                  <PrivateRoute redirectTo="/login" component={<Contacts />} />
+                }
+              />
+            </Route>
+          </Routes>
+        </Suspense>
+      )}
     </div>
   );
 };

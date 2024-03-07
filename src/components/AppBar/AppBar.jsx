@@ -1,14 +1,41 @@
+import { styled } from '@mui/material/styles';
+import MuiAppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
 import { UserMenu } from 'components/UserMenu/UserMenu';
 import { Navigation } from '../Navigation/Navigation';
 import { AuthNav } from '../AuthNav/AuthNav';
 import { useAuth } from '../hooks/useAuth';
-export const AppBar = () => {
+import ContactsIcon from '@mui/icons-material/Contacts';
+
+const AppBar = styled(MuiAppBar)(({ theme }) => ({
+  maxWidth: '1440',
+  backgroundColor: '#007bff',
+  height: '120px',
+  color: 'white',
+
+  '& .MuiToolbar-root': {
+    transition: 'background-color 0.98s',
+    display: 'flex',
+  },
+  '&': {},
+}));
+
+export const Appbar = () => {
   const { isLoggedIn } = useAuth();
 
   return (
-    <header>
-      <Navigation />
-      {isLoggedIn ? <UserMenu /> : <AuthNav />}
-    </header>
+    <div>
+      <AppBar position="static">
+        <Toolbar>
+          <ContactsIcon color="inherit" />
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            PHONEBOOK
+          </Typography>
+          <Navigation />
+          {isLoggedIn ? <UserMenu /> : <AuthNav />}
+        </Toolbar>
+      </AppBar>
+    </div>
   );
 };

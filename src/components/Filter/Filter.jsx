@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styles from './Filter.module.css';
 import { updateFilter } from 'redux/Contacts/filterSlice';
+import { TextField } from '@mui/material';
 
 const Filter = () => {
   const [filterValue, setFilterValue] = useState('');
@@ -16,8 +17,9 @@ const Filter = () => {
   return (
     <div>
       <label className={styles.filterLabel}>
-        Знайти контакти за ім'ям
-        <input
+        <TextField
+          sx={{ mb: '1.5rem' }}
+          label="search"
           className={styles.filterInput}
           type="text"
           value={filterValue}

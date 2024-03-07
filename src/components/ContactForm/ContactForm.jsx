@@ -5,6 +5,7 @@ import {
   useAddContactMutation,
   useGetContactsQuery,
 } from '../../redux/Contacts/contactsSlice';
+import { TextField } from '@mui/material';
 
 const ContactForm = () => {
   const [name, setName] = useState('');
@@ -46,10 +47,11 @@ const ContactForm = () => {
       {isError && <div className={styles.error}>{error?.message}</div>}
 
       <label htmlFor="name" className={styles.label}>
-        Ім'я
-        <input
-          type="text"
+        <TextField
           name="name"
+          variant="standard"
+          label="name"
+          type="text"
           value={name}
           className={styles.input}
           pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -59,10 +61,11 @@ const ContactForm = () => {
         />
       </label>
       <label htmlFor="number" className={styles.label}>
-        Телефон
-        <input
-          type="tel"
+        <TextField
           name="number"
+          variant="standard"
+          label="number"
+          type="tel"
           value={number}
           className={styles.input}
           pattern="\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"

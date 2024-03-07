@@ -6,15 +6,20 @@ import {
   useDeleteContactMutation,
 } from '../../redux/Contacts/contactsSlice';
 import { selectFilter } from '../../redux/Contacts/filterSlice';
+import { Card, Grid } from '@mui/material';
+
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import Avatar from '@mui/material/Avatar';
+import { blue } from '@mui/material/colors';
 
 const ContactList = () => {
-  const { data, refetch } = useGetContactsQuery(); // Додали refetch до деструктуризації
+  const { data, refetch } = useGetContactsQuery();
   const [deleteContact, { isLoading }] = useDeleteContactMutation();
   const filterItems = useSelector(selectFilter);
 
   const handleDeleteContact = async id => {
     await deleteContact({ id });
-    refetch(); // Викликаємо refetch після видалення контакту
+    refetch();
   };
 
   const normalizedFilter = filterItems.toLowerCase();
@@ -25,23 +30,36 @@ const ContactList = () => {
     : [];
 
   return (
-    <ul>
+    <Grid container spacing={2}>
       {filteredContacts.map(({ id, number, name }) => (
-        <li key={id} className={styles.contactItem}>
-          <p className={styles.contactDetails}>
-            {name}: {number}
-          </p>
-          <button
-            type="button"
-            onClick={() => handleDeleteContact(id)}
-            className={styles.deleteButton}
-            disabled={isLoading}
-          >
-            Видалити
-          </button>
-        </li>
+        <Grid
+          item
+          xs="12"
+          justifyContent="center"
+          alignItems="center"
+          key={id}
+          className={styles.contactItem}
+        >
+          <Card>
+            <Avatar
+              sx={{ bgcolor: blue[600] }}
+              alt={name}
+              src="/broken-image.jpg"
+            />
+            <p className={styles.contactDetails}>
+              {name}: {number}
+            </p>
+            <DeleteForeverIcon
+              type="button"
+              onClick={() => handleDeleteContact(id)}
+              disabled={isLoading}
+            >
+              Видалити
+            </DeleteForeverIcon>
+          </Card>
+        </Grid>
       ))}
-    </ul>
+    </Grid>
   );
 };
 
