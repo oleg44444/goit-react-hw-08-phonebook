@@ -9,7 +9,7 @@ import { useAuth } from '../hooks/useAuth';
 import ContactsIcon from '@mui/icons-material/Contacts';
 
 const AppBar = styled(MuiAppBar)(({ theme }) => ({
-  maxWidth: '1440',
+  maxWidth: '1440px',
   backgroundColor: '#007bff',
   height: '120px',
   color: 'white',
@@ -17,8 +17,8 @@ const AppBar = styled(MuiAppBar)(({ theme }) => ({
   '& .MuiToolbar-root': {
     transition: 'background-color 0.98s',
     display: 'flex',
+    alignItems: 'center',
   },
-  '&': {},
 }));
 
 export const Appbar = () => {
@@ -28,8 +28,8 @@ export const Appbar = () => {
     <div>
       <AppBar position="static">
         <Toolbar>
-          <ContactsIcon color="inherit" />
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <ContactsIcon color="inherit" sx={{ mr: 1 }} />
+          <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
             PHONEBOOK
           </Typography>
           <Navigation />

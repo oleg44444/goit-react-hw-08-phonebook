@@ -18,8 +18,12 @@ const Filter = () => {
     <div>
       <label className={styles.filterLabel}>
         <TextField
-          sx={{ mb: '1.5rem' }}
-          label="search"
+          sx={{ 
+            mb: '1.5rem', 
+            width: '100%',  // Розширює ширину до 100% батьківського контейнера
+            maxWidth: 400   // Можна задати максимальну ширину, якщо потрібно
+          }}
+          label="Search"
           className={styles.filterInput}
           type="text"
           value={filterValue}

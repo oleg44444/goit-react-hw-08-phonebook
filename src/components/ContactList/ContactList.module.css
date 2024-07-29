@@ -2,8 +2,8 @@ ContactList.module.css .contactList {
   list-style: none;
   padding: 0;
 }
-
-/* .contactItem {
+/* 
+.contactItem {
   border: 1px solid #ccc;
   padding: 10px;
   margin: 10px 0;
@@ -11,8 +11,8 @@ ContactList.module.css .contactList {
   justify-content: space-between;
   align-items: center;
   font-size: 16px;
-} */
-/* 
+} 
+
 .contactDetails {
   flex-grow: 1;
   margin-right: 10px;

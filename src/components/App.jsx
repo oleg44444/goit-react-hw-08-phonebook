@@ -7,6 +7,7 @@ import { useEffect, Suspense, lazy } from 'react';
 import { useAuth } from './hooks';
 import { refreshUser } from 'redux/Auth/operations';
 
+
 const Home = lazy(() => import('./pages/Home'));
 const Register = lazy(() => import('./pages/Register'));
 const Login = lazy(() => import('./pages/Login'));
@@ -21,7 +22,7 @@ const App = () => {
   }, [dispatch]);
 
   return (
-    <div className="container" maxWidth="xl">
+    <div className="container" style={{ maxWidth: 'xl' }}>
       {isRefreshing ? (
         'loading...'
       ) : (
